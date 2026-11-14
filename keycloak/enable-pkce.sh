@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Run inside the Keycloak container using the credentials from Docker Compose.
+# Выполняется внутри контейнера Keycloak с учётными данными из Docker Compose.
 : "${KEYCLOAK_ADMIN:?KEYCLOAK_ADMIN is required}"
 : "${KEYCLOAK_ADMIN_PASSWORD:?KEYCLOAK_ADMIN_PASSWORD is required}"
 
@@ -15,7 +15,7 @@ reports_client_id=$(kcadm get clients -r reports-realm \
   -q clientId=reports-frontend --fields id --format csv --noquotes)
 
 if [[ -z "$reports_client_id" || "$reports_client_id" == *$'\n'* ]]; then
-  printf '%s\n' 'Expected exactly one reports-frontend client in reports-realm.' >&2
+  printf '%s\n' 'В reports-realm должен быть ровно один клиент reports-frontend.' >&2
   exit 1
 fi
 
